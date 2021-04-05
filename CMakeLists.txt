@@ -9,6 +9,9 @@ find_package(Boost)
 if(Boost_FOUND) 
   include_directories(${Boost_INCLUDE_DIRS})
 
+  # ====================================================================================
+  #                                qtm-calc target - json
+  # ====================================================================================
   add_executable(qtm-calc)
   
   target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-core.cpp)
@@ -19,6 +22,9 @@ if(Boost_FOUND)
   target_link_libraries(qtm-calc ${Boost_LIBRARIES})
 
 
+  # ====================================================================================
+  #                         libqtmcalc target - python pybind11
+  # ====================================================================================
   add_subdirectory(extern/pybind11)
   pybind11_add_module(libqtmcalc)
 
@@ -28,4 +34,16 @@ if(Boost_FOUND)
 
   target_compile_definitions(libqtmcalc PRIVATE _LIBQTMCALC_ENABLE_PYBIND11_EXPORT)
   target_link_libraries(libqtmcalc PRIVATE ${Boost_LIBRARIES})
+
+
+  # ====================================================================================
+  #                         libqtmcalco target - default shared 
+  # ====================================================================================
+  add_library(libqtmcalco)
+
+  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-core.cpp)
+  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-data.cpp)
+  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-json.cpp)
+  
+  target_link_libraries(libqtmcalco ${Boost_LIBRARIES})
 endif()
