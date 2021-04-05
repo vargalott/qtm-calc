@@ -2,11 +2,12 @@
 
 qtm-calc is a tool that allows you to calculate the final states and some operational characteristics of a multi-channel queuing system.
 
-qtm-calc is available in two versions:
+qtm-calc is available in three versions:
 * a directly executable utility that works with json files;
-* a dynamic library designed for embedding into python language (using pybind11).
+* a dynamic library designed for embedding into python language (using pybind11):
+* a dynamic library for using in C++ code.
 
-The embedded version also has a Rust implementation (see more [qtm-calc-rust](https://github.com/Andinoriel/qtm-calc-rust)).
+The python-embedded version also has a Rust implementation (see more [qtm-calc-rust](https://github.com/Andinoriel/qtm-calc-rust)).
 
 ## Build
 
@@ -27,11 +28,12 @@ cmake -B ./build -G <preferred generator>
 
 5. Then run build command:
 ```
-cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|all>
+cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|libqtmcalco|all>
 ```
 > As you can see, to build the required version of the utility, you must use the --target parameter:
 > * qtm-calc - build executable version;
 > * libqtmcalc - build python-embedding version;
+> * libqtmcalco - build C++ shared version;
 > * all - build both of them.
 
 6. You've done! The builded binary file(s) available in the build directory.
@@ -113,6 +115,20 @@ cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|all
 > print(libqtmcalc.qtm_data.calc_avg_queue(x)) # will use actual fs
 > ```
 
+3. For shared C++ version you must make sure that you have successfully built *libqtmcalco* target and *.dll or *.so file is available. Then, an example usage in C++ code:
+
+> ```cpp
+> #include <qtm-core.hpp>
+> #include <qtm-data.hpp>
+> 
+> // somewhere in code
+> qtm::qtm x(10, 1, 1.5, 0.7, 0, -1);
+> if (x.is_fs_outdated()) {
+>   x.calc_final_states();
+> }
+> std::cout << x.final_states();
+> // ...
+> ```
 
 ## License
 
