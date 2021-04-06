@@ -39,11 +39,10 @@ if(Boost_FOUND)
   # ====================================================================================
   #                         libqtmcalco target - default shared 
   # ====================================================================================
-  add_library(libqtmcalco)
+  add_library(libqtmcalco SHARED)
 
   target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-core.cpp)
   target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-data.cpp)
-  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/qtm-json.cpp)
   
   target_link_libraries(libqtmcalco ${Boost_LIBRARIES})
 endif()
