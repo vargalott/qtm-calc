@@ -17,23 +17,23 @@ The python-embedded version also has a Rust implementation (see more [qtm-calc-r
 
 3. Init the pybind11 git submodule:
 ```
-git submodule init
-git submodule update --recursive
+$ git submodule init
+$ git submodule update --recursive
 ```
 
 4. Configure the project using CMake:
 ```
-cmake -B ./build -G <preferred generator>
+$ cmake -B ./build -G <preferred generator>
 ```
 
 5. Then run build command:
 ```
-cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|libqtmcalco|all>
+$ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|libqtmcalc|all>
 ```
 > As you can see, to build the required version of the utility, you must use the --target parameter:
 > * qtm-calc - build executable version;
-> * libqtmcalc - build python-embedding version;
-> * libqtmcalco - build C++ shared version;
+> * pyqtmcalc - build python-embedding version;
+> * libqtmcalc - build C++ shared version;
 > * all - build both of them.
 
 6. You've done! The builded binary file(s) available in the build directory.
@@ -73,26 +73,26 @@ cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|lib
 > 
 > To run the program, enter:
 > ```
-> qtm-calc <input json file> <output json file>
+> $ qtm-calc <input json file> <output json file>
 > ```
 
-2. For embedded version you must make sure that you have successfully built *libqtmcalc* target and *.pyd or *.so file is available. Then, an example usage in python code:
+2. For embedded version you must make sure that you have successfully built *pyqtmcalc* target and *.pyd or *.so file is available. Then, an example usage in python code:
 
 > ```python
-> import libqtmcalc
+> import pyqtmcalc
 > 
-> x = libqtmcalc.qtm(10, 1, 1.5, 0.7, 0, -1)
+> x = pyqtmcalc.qtm(10, 1, 1.5, 0.7, 0, -1)
 > if x.is_fs_outdated(): # check if fs was calculated since last change of internals
 >   x.calc_final_states() # necessary for further action
 > print(x.final_states())
 > 
 > # calc operational characteristics
-> print(libqtmcalc.qtm_data.calc_avg_queue(x))
-> print(libqtmcalc.qtm_data.calc_ete(x))
-> print(libqtmcalc.qtm_data.calc_avg_time_queue(x))
-> print(libqtmcalc.qtm_data.calc_perc_served_req(x))
-> print(libqtmcalc.qtm_data.calc_avg_count_served_req(x))
-> print(libqtmcalc.qtm_data.calc_avg_count_req(x))
+> print(pyqtmcalc.qtm_data.calc_avg_queue(x))
+> print(pyqtmcalc.qtm_data.calc_ete(x))
+> print(pyqtmcalc.qtm_data.calc_avg_time_queue(x))
+> print(pyqtmcalc.qtm_data.calc_perc_served_req(x))
+> print(pyqtmcalc.qtm_data.calc_avg_count_served_req(x))
+> print(pyqtmcalc.qtm_data.calc_avg_count_req(x))
 > 
 > # get current values of system internals
 > print(x.channel_count())
@@ -112,12 +112,21 @@ cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|lib
 > x.nu(1)
 > x.n(1)
 >
-> print(libqtmcalc.qtm_data.calc_avg_queue(x)) # will use actual fs
+> print(pyqtmcalc.qtm_data.calc_avg_queue(x)) # will use actual fs
 > ```
 
-3. For shared C++ version you must make sure that you have successfully built *libqtmcalco* target and *.dll or *.so file is available. Then, an example usage in C++ code:
-
-> ```cpp
+3. For shared C++ version it's preferable to use CMake:
+   
+>```cmake
+> cmake_minimum_required(VERSION 3.12)
+> project(project_name LANGUAGES CXX)
+>
+> add_subdirectory(/path/to/qtm-calc/dir EXCLUDE_FROM_ALL)
+>
+> add_executable(executable_name main.cpp)
+> target_link_libraries(executable_name PRIVATE libqtmcalc)
+>```
+>```cpp
 > #include <qtm-core.hpp>
 > #include <qtm-data.hpp>
 > 
