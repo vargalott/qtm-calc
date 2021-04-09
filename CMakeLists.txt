@@ -44,6 +44,6 @@ if(Boost_FOUND)
   target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp)
   target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp)
   
-  target_include_directories(libqtmcalco PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
+  target_include_directories(libqtmcalco PUBLIC ${Boost_INCLUDE_DIRS} ${CMAKE_CURRENT_LIST_DIR}/src)
   target_link_libraries(libqtmcalco PRIVATE ${Boost_LIBRARIES})
 endif()
