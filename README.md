@@ -134,6 +134,10 @@ cmake --build ./build --config <Debug|Release> --target <qtm-calc|libqtmcalc|lib
 
 This project is licensed under the [MIT License](LICENSE).
 
+## Dependents
+
+This project is used by [gw-dss-cpp](https://github.com/HanGerrel/gw-dss-cpp/) - predict tool based on queuing theory.
+
 ## Credits
 
 My thanks to the developers of the [Boost C++ Libraries](https://www.boost.org/) and [pybind11](https://github.com/pybind/pybind11).
