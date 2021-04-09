@@ -30,11 +30,11 @@ $ cmake -B ./build -G <preferred generator>
 ```
 $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|libqtmcalc|all>
 ```
-> As you can see, to build the required version of the utility, you must use the --target parameter:
+> As you can see, to build the required version of the utility, you must use the *--target* parameter:
 > * qtm-calc - build executable version;
 > * pyqtmcalc - build python-embedding version;
 > * libqtmcalc - build C++ shared version;
-> * all - build both of them.
+> * all - build all of them.
 
 6. You've done! The builded binary file(s) available in the build directory.
 
