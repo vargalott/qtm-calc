@@ -19,7 +19,7 @@ if(Boost_FOUND)
   target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-json.cpp)
   target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
 
-  target_link_libraries(qtm-calc ${Boost_LIBRARIES})
+  target_link_libraries(qtm-calc PRIVATE ${Boost_LIBRARIES})
 
 
   # ====================================================================================
