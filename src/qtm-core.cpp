@@ -120,8 +120,6 @@ std::vector<double> qtm::calc_final_states(void) {
   }
   b(total_count) = 1.;
 
-  std::cout << a << "\n" << b << "\n";
-
   boost::numeric::ublas::permutation_matrix<double> pm(a.size1());
   boost::numeric::ublas::lu_factorize(a, pm);
   boost::numeric::ublas::lu_substitute(a, pm, b);
