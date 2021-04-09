@@ -2,48 +2,52 @@ cmake_minimum_required(VERSION 3.12)
 
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_SHARED_LIBRARY_PREFIX_CXX "")
 
 project(qtm-calc)
 
 find_package(Boost)
 if(Boost_FOUND) 
   include_directories(${Boost_INCLUDE_DIRS})
+  link_libraries(${Boost_LIBRARIES})
 
   # ====================================================================================
   #                                qtm-calc target - json
   # ====================================================================================
   add_executable(qtm-calc)
   
-  target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp)
-  target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp)
-  target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-json.cpp)
-  target_sources(qtm-calc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
-
-  target_link_libraries(qtm-calc PRIVATE ${Boost_LIBRARIES})
+  target_sources(qtm-calc PRIVATE 
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp 
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-json.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
+  )
 
 
   # ====================================================================================
-  #                         libqtmcalc target - python pybind11
+  #                         pyqtmcalc target - python pybind11
   # ====================================================================================
   add_subdirectory(extern/pybind11)
-  pybind11_add_module(libqtmcalc)
+  pybind11_add_module(pyqtmcalc)
 
-  target_sources(libqtmcalc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp)
-  target_sources(libqtmcalc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp)
-  target_sources(libqtmcalc PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/main_export.cpp)
+  target_sources(pyqtmcalc PRIVATE 
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/main_export.cpp
+  )
 
-  target_compile_definitions(libqtmcalc PRIVATE _LIBQTMCALC_ENABLE_PYBIND11_EXPORT)
-  target_link_libraries(libqtmcalc PRIVATE ${Boost_LIBRARIES})
+  target_compile_definitions(pyqtmcalc PRIVATE _LIBQTMCALC_ENABLE_PYBIND11_EXPORT)
 
 
   # ====================================================================================
-  #                         libqtmcalco target - default shared 
+  #                         libqtmcalc target - default shared 
   # ====================================================================================
-  add_library(libqtmcalco SHARED)
+  add_library(libqtmcalc SHARED)
 
-  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp)
-  target_sources(libqtmcalco PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp)
+  target_sources(libqtmcalc PRIVATE 
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-core.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qtm-data.cpp
+  )
   
-  target_include_directories(libqtmcalco PUBLIC ${Boost_INCLUDE_DIRS} ${CMAKE_CURRENT_LIST_DIR}/src)
-  target_link_libraries(libqtmcalco PRIVATE ${Boost_LIBRARIES})
+  target_include_directories(libqtmcalc PUBLIC ${Boost_INCLUDE_DIRS} ${CMAKE_CURRENT_LIST_DIR}/src)
 endif()
