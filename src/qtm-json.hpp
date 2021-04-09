@@ -15,7 +15,7 @@
 
 namespace qtm {
 
-class qtm_json final {
+class qtm_json final : private boost::noncopyable {
 private:
   boost::property_tree::ptree root_in;
   boost::property_tree::ptree root_out;

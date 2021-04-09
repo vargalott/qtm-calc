@@ -1,4 +1,5 @@
 #include "qtm-json.hpp"
+#include <cstdint>
 
 namespace qtm {
 
@@ -7,13 +8,12 @@ void qtm_json::read(std::string path) {
 };
 
 void qtm_json::process(void) {
-  std::size_t channel_count =
-      this->root_in.get<std::size_t>("channel_count", 1);
-  std::size_t queue_size = this->root_in.get<std::size_t>("queue_size", 0);
+  std::uint64_t channel_count =this->root_in.get<std::size_t>("channel_count", 1);
+  std::uint64_t queue_size = this->root_in.get<std::size_t>("queue_size", 0);
   double la = this->root_in.get<double>("la", 1);
   double mu = this->root_in.get<double>("mu", 1);
   double nu = this->root_in.get<double>("nu", 0);
-  std::ptrdiff_t n = this->root_in.get<std::ptrdiff_t>("n", -1);
+  std::int64_t n = this->root_in.get<std::ptrdiff_t>("n", -1);
 
   qtm qtm(channel_count, queue_size, la, mu, nu, n);
 

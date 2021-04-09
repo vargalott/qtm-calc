@@ -5,9 +5,9 @@
 #include "qtm-core.hpp"
 
 namespace qtm {
-class qtm_data final {
+class qtm_data final : private boost::noncopyable {
 private:
-  static void calc_fs_if_outdated(qtm const&qtm);
+  static void calc_fs_if_outdated(qtm const &qtm);
 
 public:
   qtm_data(void) = delete;

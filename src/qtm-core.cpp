@@ -1,12 +1,12 @@
 #include "qtm-core.hpp"
+#include <cstdint>
 
 namespace qtm {
 
-boost::numeric::ublas::matrix<double> qtm::matrix_init(size_t channel_count,
-                                                       size_t queue_size,
-                                                       double la, double mu,
-                                                       double nu, ptrdiff_t n) {
-  size_t total_count = channel_count + queue_size;
+boost::numeric::ublas::matrix<double>
+qtm::matrix_init(std::uint64_t channel_count, std::uint64_t queue_size,
+                 double la, double mu, double nu, std::int64_t n) {
+  std::uint64_t total_count = channel_count + queue_size;
   boost::numeric::ublas::matrix<double> matrix;
   size_t mu_index = 0;
   ptrdiff_t max_n = n;
@@ -55,27 +55,29 @@ boost::numeric::ublas::matrix<double> qtm::matrix_init(size_t channel_count,
   return matrix;
 };
 
-qtm::qtm(size_t channel_count, size_t queue_size, double la, double mu,
-         double nu, ptrdiff_t n)
+qtm::qtm(std::uint64_t channel_count, std::uint64_t queue_size, double la,
+         double mu, double nu, std::int64_t n)
     : channel_count_(channel_count), queue_size_(queue_size), la_(la), mu_(mu),
       nu_(nu), n_(n), is_fs_outdated_(true){};
 
-size_t const &qtm::channel_count(void) const { return this->channel_count_; };
-size_t const &qtm::queue_size(void) const { return this->queue_size_; };
-ptrdiff_t const &qtm::n(void) const { return this->n_; };
+std::uint64_t const &qtm::channel_count(void) const {
+  return this->channel_count_;
+};
+std::uint64_t const &qtm::queue_size(void) const { return this->queue_size_; };
+std::int64_t const &qtm::n(void) const { return this->n_; };
 double const &qtm::la(void) const { return this->la_; };
 double const &qtm::mu(void) const { return this->mu_; };
 double const &qtm::nu(void) const { return this->nu_; };
 
-void qtm::channel_count(size_t channel_count_) {
+void qtm::channel_count(std::uint64_t channel_count_) {
   this->channel_count_ = channel_count_;
   this->is_fs_outdated_ = true;
 };
-void qtm::queue_size(size_t queue_size_) {
+void qtm::queue_size(std::uint64_t queue_size_) {
   this->queue_size_ = queue_size_;
   this->is_fs_outdated_ = true;
 };
-void qtm::n(ptrdiff_t n_) {
+void qtm::n(std::int64_t n_) {
   this->n_ = n_;
   this->is_fs_outdated_ = true;
 };
@@ -105,7 +107,7 @@ std::vector<double> qtm::calc_final_states(void) {
   auto a = this->matrix_init(this->channel_count_, this->queue_size_, this->la_,
                              this->mu_, this->nu_, this->n_);
 
-  size_t total_count = this->channel_count_ + this->queue_size_ + 1;
+  std::uint64_t total_count = this->channel_count_ + this->queue_size_ + 1;
 
   a.resize(a.size1() + 1, a.size2() + 1);
   for (std::size_t i = 0; i < a.size1() - 1; ++i) {
@@ -145,27 +147,21 @@ void init_module_qtm_core(pybind11::module_ &m) {
   m.doc() = "qtm-core wrapper";
 
   pybind11::class_<qtm::qtm>(m, "qtm", pybind11::is_final())
-      .def(pybind11::init<size_t /* channel_count */, size_t /* queue_size */,
-                          double /* la */,
-                          double /* mu */>()) // default: nu = 0, n = -1
-      .def(pybind11::init<size_t /* channel_count */, size_t /* queue_size */,
-                          double /* la */, double /* mu */,
-                          double /* nu */>()) // default: n = -1
-      .def(pybind11::init<size_t /* channel_count */, size_t /* queue_size */,
-                          double /* la */, double /* mu */, double /* nu */,
-                          std::ptrdiff_t /* n */>())
+      // channel_count, queue_size, la, mu, nu;  default nu = 0, n = -1
+      .def(pybind11::init<std::uint64_t, std::uint64_t, double, double>())
+      // channel_count, queue_size, la, mu, nu, nu;  default n = -1
+      .def(pybind11::init<std::uint64_t, std::uint64_t, double, double, double>())
+      // channel_count, queue_size, la, mu, nu, nu, n
+      .def(pybind11::init<std::uint64_t, std::uint64_t, double, double, double, std::int64_t>())
 
       .def("channel_count",
-           static_cast<std::size_t const &(qtm::qtm::*)(void) const>(
-               &qtm::qtm::channel_count),
+           static_cast<std::uint64_t const &(qtm::qtm::*)(void) const>(&qtm::qtm::channel_count),
            pybind11::return_value_policy::copy)
       .def("queue_size",
-           static_cast<std::size_t const &(qtm::qtm::*)(void) const>(
-               &qtm::qtm::queue_size),
+           static_cast<std::uint64_t const &(qtm::qtm::*)(void) const>(&qtm::qtm::queue_size),
            pybind11::return_value_policy::copy)
       .def("n",
-           static_cast<std::ptrdiff_t const &(qtm::qtm::*)(void) const>(
-               &qtm::qtm::n),
+           static_cast<std::int64_t const &(qtm::qtm::*)(void) const>( &qtm::qtm::n),
            pybind11::return_value_policy::copy)
       .def("la",
            static_cast<double const &(qtm::qtm::*)(void) const>(&qtm::qtm::la),
@@ -177,14 +173,18 @@ void init_module_qtm_core(pybind11::module_ &m) {
            static_cast<double const &(qtm::qtm::*)(void) const>(&qtm::qtm::nu),
            pybind11::return_value_policy::copy)
 
-      .def("channel_count", static_cast<void (qtm::qtm::*)(std::size_t)>(
-                                &qtm::qtm::channel_count))
-      .def("queue_size",
-           static_cast<void (qtm::qtm::*)(std::size_t)>(&qtm::qtm::queue_size))
-      .def("n", static_cast<void (qtm::qtm::*)(std::ptrdiff_t)>(&qtm::qtm::n))
-      .def("la", static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::la))
-      .def("mu", static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::mu))
-      .def("nu", static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::nu))
+      .def("channel_count", 
+           static_cast<void (qtm::qtm::*)(std::uint64_t)>(&qtm::qtm::channel_count))
+      .def("queue_size", 
+           static_cast<void (qtm::qtm::*)(std::uint64_t)>(&qtm::qtm::queue_size))
+      .def("n", 
+           static_cast<void (qtm::qtm::*)(std::int64_t)>(&qtm::qtm::n))
+      .def("la", 
+           static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::la))
+      .def("mu", 
+           static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::mu))
+      .def("nu", 
+           static_cast<void (qtm::qtm::*)(double)>(&qtm::qtm::nu))
 
       .def("final_states", &qtm::qtm::final_states,
            pybind11::return_value_policy::move)

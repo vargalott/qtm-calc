@@ -1,4 +1,5 @@
 #include "qtm-data.hpp"
+#include <cstdint>
 
 namespace qtm {
 
@@ -11,7 +12,7 @@ void qtm_data::calc_fs_if_outdated(qtm const &qtm) {
 double qtm_data::calc_avg_queue(qtm const &qtm) {
   qtm_data::calc_fs_if_outdated(qtm);
 
-  std::size_t i = 1;
+  std::uint64_t i = 1;
   double res = 0.;
   for (auto &state :
        // just slicing { final_states[channel_count+1:] }
@@ -19,7 +20,7 @@ double qtm_data::calc_avg_queue(qtm const &qtm) {
          return std::vector<double>(vec.begin() + f, vec.end());
        })(qtm.final_states(), qtm.channel_count() + 1)) {
     res += i * state;
-    i = clamp<std::size_t>(i + 1, 1, qtm.queue_size());
+    i = clamp<std::uint64_t>(i + 1, 1, qtm.queue_size());
   }
   return res;
 };
@@ -27,11 +28,11 @@ double qtm_data::calc_avg_queue(qtm const &qtm) {
 double qtm_data::calc_ete(qtm const &qtm) {
   qtm_data::calc_fs_if_outdated(qtm);
 
-  std::size_t i = 0;
+  std::uint64_t i = 0;
   double res = 0.;
   for (auto &state : qtm.final_states()) {
     res += i * state;
-    i = clamp<std::size_t>(i + 1, 0, qtm.channel_count());
+    i = clamp<std::uint64_t>(i + 1, 0, qtm.channel_count());
   }
   res /= qtm.channel_count();
   return res;
@@ -52,7 +53,7 @@ double qtm_data::calc_perc_served_req(qtm const &qtm) {
 double qtm_data::calc_avg_count_served_req(qtm const &qtm) {
   qtm_data::calc_fs_if_outdated(qtm);
 
-  std::size_t i = 0;
+  std::uint64_t i = 0;
   double res = 0.;
   for (auto &state : qtm.final_states()) {
     res += state * i;
@@ -66,7 +67,7 @@ double qtm_data::calc_avg_count_served_req(qtm const &qtm) {
 double qtm_data::calc_avg_count_req(qtm const &qtm) {
   qtm_data::calc_fs_if_outdated(qtm);
 
-  std::size_t i = 0;
+  std::uint64_t i = 0;
   double res = 0.;
   for (auto &state : qtm.final_states()) {
     res += state * i;
