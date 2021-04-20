@@ -78,11 +78,15 @@ double qtm_data::calc_avg_count_req(qtm const &qtm) {
 
 }; // namespace qtm
 
+
 #ifdef _PYQTMCALC_ENABLE_PYBIND11_EXPORT
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+/**
+ * Perform initialization of the pybind11 binding module
+ */
 void init_module_qtm_data(pybind11::module_ &m) {
   m.doc() = "qtm-data wrapper";
 

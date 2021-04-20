@@ -138,11 +138,15 @@ std::vector<double> qtm::calc_final_states(void) {
 
 }; // namespace qtm
 
+
 #ifdef _PYQTMCALC_ENABLE_PYBIND11_EXPORT
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+/**
+ * Perform initialization of the pybind11 binding module
+ */
 void init_module_qtm_core(pybind11::module_ &m) {
   m.doc() = "qtm-core wrapper";
 
