@@ -48,7 +48,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|li
 >     "queue_size": , // number of places in the queue
 >     "la": , // input flow rate
 >     "mu": , // output flow rate
->     "nu": , // impatience indicator (optional parameter, default: 0)
+>     "nu": , // impatience rate (optional parameter, default: 0)
 >     "n": // number of load sources (optional parameter, default: -1)
 > }
 > ```
@@ -138,6 +138,8 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|li
 > std::cout << x.final_states();
 > // ...
 > ```
+
+## Testing
 
 ## License
 
