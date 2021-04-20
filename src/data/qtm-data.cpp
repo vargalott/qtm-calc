@@ -78,7 +78,7 @@ double qtm_data::calc_avg_count_req(qtm const &qtm) {
 
 }; // namespace qtm
 
-#ifdef _LIBQTMCALC_ENABLE_PYBIND11_EXPORT
+#ifdef _PYQTMCALC_ENABLE_PYBIND11_EXPORT
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -104,4 +104,4 @@ void init_module_qtm_data(pybind11::module_ &m) {
                   pybind11::return_value_policy::copy);
 };
 
-#endif // _LIBQTMCALC_ENABLE_PYBIND11_EXPORT
+#endif // _PYQTMCALC_ENABLE_PYBIND11_EXPORT

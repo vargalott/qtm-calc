@@ -11,7 +11,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-#include "qtm-data.hpp"
+#include <qtm-data.hpp>
 
 namespace qtm {
 

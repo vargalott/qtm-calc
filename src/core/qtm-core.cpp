@@ -138,7 +138,7 @@ std::vector<double> qtm::calc_final_states(void) {
 
 }; // namespace qtm
 
-#ifdef _LIBQTMCALC_ENABLE_PYBIND11_EXPORT
+#ifdef _PYQTMCALC_ENABLE_PYBIND11_EXPORT
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -194,4 +194,4 @@ void init_module_qtm_core(pybind11::module_ &m) {
            pybind11::return_value_policy::move);
 };
 
-#endif // _LIBQTMCALC_ENABLE_PYBIND11_EXPORT
+#endif // _PYQTMCALC_ENABLE_PYBIND11_EXPORT
