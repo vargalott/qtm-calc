@@ -141,16 +141,28 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|li
 
 ## Testing
 
+To run project tests:
+
+1. Configure the project using CMake:
+```
+$ cmake -B ./build -G <preferred generator>
+```
+
+2. Run build tests command:
+```
+$ cmake --build ./build --config <Debug|Release> --target run-tests
+```
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ## Dependents
 
-This project is used by [gw-dss-cpp](https://github.com/HanGerrel/gw-dss-cpp/) - predict tool based on queuing theory.
+This project is used by [gw-dss-cpp](https://github.com/Vemestael/gw-dss-cpp/) - predict tool based on queuing theory.
 
 ## Credits
 
 My thanks to the developers of the [Boost C++ Libraries](https://www.boost.org/) and [pybind11](https://github.com/pybind/pybind11).
 
-Especial thanks to [IceArrow256](https://github.com/IceArrow256) and [HanGerrel](https://github.com/HanGerrel) for help in writing computing algorithms and code structuring.
+Especial thanks to [IceArrow256](https://github.com/IceArrow256) and [Vemestael](https://github.com/Vemestael) for help in writing computing algorithms and code structuring.
