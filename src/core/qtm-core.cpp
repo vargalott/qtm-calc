@@ -60,14 +60,14 @@ qtm::qtm(std::uint64_t channel_count, std::uint64_t queue_size, double la,
     : channel_count_(channel_count), queue_size_(queue_size), la_(la), mu_(mu),
       nu_(nu), n_(n), is_fs_outdated_(true){};
 
-std::uint64_t const &qtm::channel_count(void) const {
+std::uint64_t qtm::channel_count(void) const {
   return this->channel_count_;
 };
-std::uint64_t const &qtm::queue_size(void) const { return this->queue_size_; };
-std::int64_t const &qtm::n(void) const { return this->n_; };
-double const &qtm::la(void) const { return this->la_; };
-double const &qtm::mu(void) const { return this->mu_; };
-double const &qtm::nu(void) const { return this->nu_; };
+std::uint64_t qtm::queue_size(void) const { return this->queue_size_; };
+std::int64_t qtm::n(void) const { return this->n_; };
+double qtm::la(void) const { return this->la_; };
+double qtm::mu(void) const { return this->mu_; };
+double qtm::nu(void) const { return this->nu_; };
 
 void qtm::channel_count(std::uint64_t channel_count_) {
   this->channel_count_ = channel_count_;
@@ -159,22 +159,22 @@ void init_module_qtm_core(pybind11::module_ &m) {
       .def(pybind11::init<std::uint64_t, std::uint64_t, double, double, double, std::int64_t>())
 
       .def("channel_count",
-           static_cast<std::uint64_t const &(qtm::qtm::*)(void) const>(&qtm::qtm::channel_count),
+           static_cast<std::uint64_t (qtm::qtm::*)(void) const>(&qtm::qtm::channel_count),
            pybind11::return_value_policy::copy)
       .def("queue_size",
-           static_cast<std::uint64_t const &(qtm::qtm::*)(void) const>(&qtm::qtm::queue_size),
+           static_cast<std::uint64_t (qtm::qtm::*)(void) const>(&qtm::qtm::queue_size),
            pybind11::return_value_policy::copy)
       .def("n",
-           static_cast<std::int64_t const &(qtm::qtm::*)(void) const>( &qtm::qtm::n),
+           static_cast<std::int64_t (qtm::qtm::*)(void) const>( &qtm::qtm::n),
            pybind11::return_value_policy::copy)
       .def("la",
-           static_cast<double const &(qtm::qtm::*)(void) const>(&qtm::qtm::la),
+           static_cast<double (qtm::qtm::*)(void) const>(&qtm::qtm::la),
            pybind11::return_value_policy::copy)
       .def("mu",
-           static_cast<double const &(qtm::qtm::*)(void) const>(&qtm::qtm::mu),
+           static_cast<double (qtm::qtm::*)(void) const>(&qtm::qtm::mu),
            pybind11::return_value_policy::copy)
       .def("nu",
-           static_cast<double const &(qtm::qtm::*)(void) const>(&qtm::qtm::nu),
+           static_cast<double (qtm::qtm::*)(void) const>(&qtm::qtm::nu),
            pybind11::return_value_policy::copy)
 
       .def("channel_count", 

@@ -69,27 +69,27 @@ public:
   /**
    * Get the current value of the channel count of the queuing system
    */
-  std::uint64_t const &channel_count(void) const;
+  std::uint64_t channel_count(void) const;
   /**
    * Get the current value of the queue size of the queuing system
    */
-  std::uint64_t const &queue_size(void) const;
+  std::uint64_t queue_size(void) const;
   /**
    * Get the current value of the load sources of the queuing system
    */
-  std::int64_t const &n(void) const;
+  std::int64_t n(void) const;
   /**
    * Get the current value of the input flow rate of the queuing system
    */
-  double const &la(void) const;
+  double la(void) const;
   /**
    * Get the current value of the output flow rate of the queuing system
    */
-  double const &mu(void) const;
+  double mu(void) const;
   /**
    * Get the current value of the impatience rate of the queuing system
    */
-  double const &nu(void) const;
+  double nu(void) const;
 
   /**
    * Set the value of the channel count of the queuing system

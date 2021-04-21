@@ -37,7 +37,7 @@ if(Boost_FOUND)
   target_sources(pyqtmcalc PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/core/qtm-core.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/data/qtm-data.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/main_export.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pyqtmcalc.cpp
   )
 
   target_compile_definitions(pyqtmcalc PRIVATE _PYQTMCALC_ENABLE_PYBIND11_EXPORT)
