@@ -5,7 +5,7 @@ qtm-calc is a tool that allows you to calculate the final states and some operat
 qtm-calc is available in three versions:
 * a directly executable utility that works with json files;
 * a dynamic library designed for embedding into python language (using pybind11):
-* a dynamic library for using in C++ code.
+* a static library for using in C++ code.
 
 The python-embedded version also has a Rust implementation (see more [qtm-calc-rust](https://github.com/Andinoriel/qtm-calc-rust)).
 
@@ -33,7 +33,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|li
 > As you can see, to build the required version of the utility, you must use the *--target* parameter:
 > * qtm-calc - build executable version;
 > * pyqtmcalc - build python-embedding version;
-> * libqtmcalc - build C++ shared version;
+> * libqtmcalc - build static lib version;
 > * all - build all of them.
 
 6. You've done! The builded binary file(s) available in the build directory.
@@ -115,7 +115,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|li
 > print(pyqtmcalc.qtm_data.calc_avg_queue(x)) # will use actual fs
 > ```
 
-3. For shared C++ version it's preferable to use CMake:
+3. For static lib version it's preferable to use CMake:
    
 >```cmake
 > cmake_minimum_required(VERSION 3.12)
