@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_STATIC_LIBRARY_PREFIX_CXX "")
+set(CMAKE_SHARED_LIBRARY_PREFIX_CXX "")
 
 find_package(Boost REQUIRED COMPONENTS system)
 if(Boost_FOUND)
@@ -48,7 +48,7 @@ if(Boost_FOUND)
   # ====================================================================================
   #                         libqtmcalc target - default shared 
   # ====================================================================================
-  add_library(libqtmcalc STATIC)
+  add_library(libqtmcalc SHARED)
 
   target_sources(libqtmcalc PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/core/qtm-core.cpp
