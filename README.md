@@ -24,7 +24,7 @@ $ git submodule update --recursive
 
 4. Configure the project using CMake:
 ```
-$ cmake -B ./build -G <preferred generator>
+$ cmake -B ./build -G <preferred generator> -DCMAKE_BUILD_TYPE=<Debug|Release>
 ```
 
 5. Then run build command:
