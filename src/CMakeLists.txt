@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
 
-enable_language(CXX)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_SHARED_LIBRARY_PREFIX_CXX "")
-
 find_package(Boost REQUIRED COMPONENTS system)
 if(Boost_FOUND)
 
@@ -30,7 +26,6 @@ if(Boost_FOUND)
   # ====================================================================================
   #                         pyqtmcalc target - python pybind11
   # ====================================================================================
-  # probably bad idea
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../extern/pybind11 ${CMAKE_CURRENT_BINARY_DIR}/pybind11)
   pybind11_add_module(pyqtmcalc)
 
@@ -43,19 +38,5 @@ if(Boost_FOUND)
   target_compile_definitions(pyqtmcalc PRIVATE _PYQTMCALC_ENABLE_PYBIND11_EXPORT)
   target_include_directories(pyqtmcalc PRIVATE ${INNER_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
   target_link_libraries(pyqtmcalc PRIVATE ${Boost_LIBRARIES})
-
-
-  # ====================================================================================
-  #                         libqtmcalc target - default shared 
-  # ====================================================================================
-  add_library(libqtmcalc SHARED)
-
-  target_sources(libqtmcalc PRIVATE 
-    ${CMAKE_CURRENT_SOURCE_DIR}/core/qtm-core.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/data/qtm-data.cpp
-  )
-
-  target_include_directories(libqtmcalc PUBLIC ${INNER_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-  target_link_libraries(libqtmcalc PRIVATE ${Boost_LIBRARIES})
 
 endif()
