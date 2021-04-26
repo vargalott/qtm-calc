@@ -7,6 +7,7 @@ qtm-calc is available in two versions:
 * a dynamic library designed for embedding into python language (using pybind11).
 
 The python-embedded version also has a Rust implementation (see more [qtm-calc-rust](https://github.com/Andinoriel/qtm-calc-rust)).
+
 For shared C++ version of qtm-calc see [qtm-calc-shared](https://github.com/Andinoriel/qtm-calc-shared).
 
 ## Build
