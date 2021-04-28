@@ -1,7 +1,7 @@
 #include <exception>
 #include <iostream>
 
-#include "qtm-json.hpp"
+#include <qtm-calc/json.hpp>
 
 int main(int argc, const char *argv[]) {
   try {

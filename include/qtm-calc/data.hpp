@@ -2,7 +2,7 @@
 #ifndef __QTM_DATA_HPP__
 #define __QTM_DATA_HPP__
 
-#include <qtm-core.hpp>
+#include <qtm-calc/core.hpp>
 
 namespace qtm {
 

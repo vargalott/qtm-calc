@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include <qtm-core.hpp>
+#include <qtm-calc/core.hpp>
 
 /**
  * qtm::qtm_core tests

@@ -1,5 +1,4 @@
-#include "qtm-core.hpp"
-#include <cstdint>
+#include <qtm-calc/core.hpp>
 
 namespace qtm {
 
