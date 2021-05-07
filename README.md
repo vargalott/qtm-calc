@@ -36,7 +36,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 > * pyqtmcalc - build python-embedding version;
 > * all - build all of them.
 
-1. You've done! The builded binary file(s) available in the build directory.
+6. You've done! The builded binary file(s) available in the build directory.
 
 ## Usage
 
