@@ -3,7 +3,7 @@
 #include <qtm-calc/data.hpp>
 
 /**
- * qtm::qtm_data tests 
+ * qtm::qtm_data tests
  */
 BOOST_AUTO_TEST_SUITE(test_suite_data)
 
@@ -86,6 +86,19 @@ BOOST_AUTO_TEST_CASE(check_avg_count_req) {
   qtm::qtm qtm(2, 1, 10., 5.);
   qtm.calc_final_states();
   auto ret = qtm::qtm_data::calc_avg_count_req(qtm);
+
+  BOOST_TEST(comp == ret);
+};
+
+/**
+ * qtm::qtm_data::check_avg_count_unserved_req() test
+ */
+BOOST_AUTO_TEST_CASE(check_avg_count_unserved_req) {
+  auto comp = 1.5760463582836595;
+
+  qtm::qtm qtm(4, 20, 37.75, 12);
+  qtm.calc_final_states();
+  auto ret = qtm::qtm_data::calc_avg_count_unserved_req(qtm);
 
   BOOST_TEST(comp == ret);
 };
