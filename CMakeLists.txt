@@ -13,21 +13,21 @@ if(Boost_FOUND)
   # ====================================================================================
   add_executable(qtm-calc)
 
-  target_sources(qtm-calc 
-    PRIVATE 
+  target_sources(qtm-calc
+    PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/src/core.cpp
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/data.cpp 
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/data.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/src/json.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
   )
 
-  target_include_directories(qtm-calc 
-    PRIVATE 
+  target_include_directories(qtm-calc
+    PRIVATE
       ${Boost_INCLUDE_DIRS}
-      ${CMAKE_CURRENT_SOURCE_DIR}/include 
+      ${CMAKE_CURRENT_SOURCE_DIR}/include
   )
-  target_link_libraries(qtm-calc 
-    PRIVATE 
+  target_link_libraries(qtm-calc
+    PRIVATE
       ${Boost_LIBRARIES}
   )
 
@@ -38,43 +38,45 @@ if(Boost_FOUND)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11)
   pybind11_add_module(pyqtmcalc)
 
-  target_sources(pyqtmcalc 
-    PRIVATE 
+  target_sources(pyqtmcalc
+    PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/src/core.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/src/data.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/src/pyqtmcalc.exp.cpp
   )
 
   target_compile_definitions(pyqtmcalc PRIVATE _PYQTMCALC_ENABLE_PYBIND11_EXPORT)
-  target_include_directories(pyqtmcalc 
-    PRIVATE 
+  target_include_directories(pyqtmcalc
+    PRIVATE
       ${Boost_INCLUDE_DIRS}
-      ${CMAKE_CURRENT_SOURCE_DIR}/include 
+      ${CMAKE_CURRENT_SOURCE_DIR}/include
   )
-  target_link_libraries(pyqtmcalc 
-    PRIVATE 
+  target_link_libraries(pyqtmcalc
+    PRIVATE
       ${Boost_LIBRARIES}
   )
 
   # ====================================================================================
   #                                  boost tests target
   # ====================================================================================
-  
+
   add_executable(boost_tests)
 
-  target_sources(boost_tests 
-    PRIVATE 
+  target_sources(boost_tests
+    PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/tests/entry.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/core.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/data.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_suite_core.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_suite_data.cpp
   )
-  target_include_directories(boost_tests 
-    PRIVATE 
+  target_include_directories(boost_tests
+    PRIVATE
       ${Boost_INCLUDE_DIRS}
-      ${CMAKE_CURRENT_SOURCE_DIR}/include 
+      ${CMAKE_CURRENT_SOURCE_DIR}/include
   )
-  target_link_libraries(boost_tests 
-    PRIVATE 
+  target_link_libraries(boost_tests
+    PRIVATE
       ${Boost_LIBRARIES}
   )
 
