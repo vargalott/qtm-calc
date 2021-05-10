@@ -73,7 +73,13 @@ double qtm_data::calc_avg_count_req(qtm const &qtm) {
     ++i;
   }
   return res;
-}
+};
+
+double qtm_data::calc_avg_count_unserved_req(qtm const &qtm) {
+  qtm_data::calc_fs_if_outdated(qtm);
+
+  return qtm_data::calc_avg_count_req(qtm) - qtm_data::calc_avg_count_served_req(qtm);
+};
 
 }; // namespace qtm
 
