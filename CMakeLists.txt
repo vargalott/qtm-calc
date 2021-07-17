@@ -60,7 +60,7 @@ if(Boost_FOUND)
   #                                  boost tests target
   # ====================================================================================
 
-  add_executable(boost_tests)
+  add_executable(boost_tests EXCLUDE_FROM_ALL)
 
   target_sources(boost_tests
     PRIVATE
