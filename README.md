@@ -1,5 +1,8 @@
 # qtm-calc
 
+[![Build](https://github.com/andinoriel/qtm-calc/actions/workflows/build.yml/badge.svg)](https://github.com/andinoriel/qtm-calc/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 qtm-calc is a tool that allows you to calculate the final states and some operational characteristics of a multi-channel queuing system.
 
 qtm-calc is available in two versions:
@@ -52,7 +55,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 >     "n": // number of load sources (optional parameter, default: -1)
 > }
 > ```
-> 
+>
 > The result will be placed in a json file with the following structure:
 > ```jsonc
 > {
@@ -65,12 +68,12 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 >     "avg_queue": , // average queue length
 >     "ete": , // system efficiency
 >     "avg_time_queue": , // average queue time
->     "perc_served_req": , // percentage of served requests 
+>     "perc_served_req": , // percentage of served requests
 >     "count_served_req": , // average number of served requests
 >     "avg_count_req": // average number of requests
 > }
 > ```
-> 
+>
 > To run the program, enter:
 > ```
 > $ qtm-calc <input json file> <output json file>
@@ -80,12 +83,12 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 
 > ```python
 > import pyqtmcalc
-> 
+>
 > x = pyqtmcalc.qtm(10, 1, 1.5, 0.7, 0, -1)
 > if x.is_fs_outdated(): # check if fs was calculated since last change of internals
 >   x.calc_final_states() # necessary for further action
 > print(x.final_states())
-> 
+>
 > # calc operational characteristics
 > print(pyqtmcalc.qtm_data.calc_avg_queue(x))
 > print(pyqtmcalc.qtm_data.calc_ete(x))
@@ -93,7 +96,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 > print(pyqtmcalc.qtm_data.calc_perc_served_req(x))
 > print(pyqtmcalc.qtm_data.calc_avg_count_served_req(x))
 > print(pyqtmcalc.qtm_data.calc_avg_count_req(x))
-> 
+>
 > # get current values of system internals
 > print(x.channel_count())
 > print(x.queue_size())
@@ -101,7 +104,7 @@ $ cmake --build ./build --config <Debug|Release> --target <qtm-calc|pyqtmcalc|al
 > print(x.mu())
 > print(x.nu())
 > print(x.n())
-> 
+>
 > # set new values of system internals
 > # after setting new values, you must perform x.calc_final_states() again
 > # however, for the qtm_data methods fs calculation will be automatic
