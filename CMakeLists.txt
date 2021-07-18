@@ -30,6 +30,7 @@ if(Boost_FOUND)
   #                                qtm-calc target - json
   # ====================================================================================
   add_executable(${PROJECT_NAME})
+  add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_objs)
 
   target_sources(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/json.cpp
@@ -51,6 +52,8 @@ if(Boost_FOUND)
   pybind11_add_module(pyqtmcalc)
 
   target_sources(pyqtmcalc PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pyqtmcalc.exp.cpp
   )
   target_compile_definitions(pyqtmcalc PRIVATE
@@ -62,7 +65,6 @@ if(Boost_FOUND)
   )
   target_link_libraries(pyqtmcalc PRIVATE
     ${Boost_LIBRARIES}
-    $<TARGET_OBJECTS:${PROJECT_NAME}_objs>
   )
 
   # ====================================================================================
@@ -70,6 +72,7 @@ if(Boost_FOUND)
   # ====================================================================================
 
   add_executable(boost_tests EXCLUDE_FROM_ALL)
+  add_dependencies(boost_tests ${PROJECT_NAME}_objs)
 
   target_sources(boost_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entry.cpp
