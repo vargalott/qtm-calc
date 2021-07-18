@@ -1,0 +1,31 @@
+version: "3"
+
+tasks:
+  init:
+    cmds:
+      - git submodule init
+      - git submodule update --init --recursive
+
+  configure_debug:
+    cmds:
+      - cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B ./build -G {{.CLI_ARGS}} -DCMAKE_BUILD_TYPE=Debug
+
+  configure_release:
+    cmds:
+      - cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B ./build -G {{.CLI_ARGS}} -DCMAKE_BUILD_TYPE=Release
+
+  build_debug:
+    cmds:
+      - cmake --build ./build --config Debug
+
+  build_release:
+    cmds:
+      - cmake --build ./build --config Release
+
+  clean:
+    cmds:
+      - cmake --build ./build --target clean
+
+  run:
+    cmds:
+      - '{{if eq OS "windows"}}./build/shooting-stars.exe{{else}}./build/shooting-stars{{end}}'
