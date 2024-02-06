@@ -1,6 +1,6 @@
 # qtm-calc
 
-[![Build](https://github.com/andinoriel/qtm-calc/actions/workflows/build.yml/badge.svg)](https://github.com/andinoriel/qtm-calc/actions/workflows/build.yml)
+[![Build](https://github.com/vargalott/qtm-calc/actions/workflows/build.yml/badge.svg)](https://github.com/vargalott/qtm-calc/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 qtm-calc is a tool that allows you to calculate the final states and some operational characteristics of a multi-channel queuing system.
@@ -8,10 +8,6 @@ qtm-calc is a tool that allows you to calculate the final states and some operat
 qtm-calc is available in two versions:
 * a directly executable utility that works with json files;
 * a dynamic library designed for embedding into python language (using pybind11).
-
-The python-embedded version also has a Rust implementation (see more [qtm-calc-rust](https://github.com/Andinoriel/qtm-calc-rust)).
-
-For shared C++ version of qtm-calc see [qtm-calc-shared](https://github.com/Andinoriel/qtm-calc-shared).
 
 ## Build
 
